@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Portfolio</title>
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --accent-color: #4fc3f7;
+            --text-color: #333;
+            --light-text: #f5f5f5;
+            --background-color: #f9f9f9;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-image: url('https://img.freepik.com/free-vector/abstract-background-gradient-colorful-design_677411-3431.jpg?semt=ais_hybrid&w=740');
+            background-size: cover;
+            background-attachment: fixed;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-color);
+            margin: 5px;
+            transition: var(--transition);
+        }
+
+        main {
+            margin-top: 80px;
+            padding: 40px 0;
+        }
+
+        section {
+            margin-bottom: 60px;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--accent-color);
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(79, 195, 247, 0.6);
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .skill-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-name {
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--accent-color);
+            border-radius: 5px;
+        }
+
+        .experience-item {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .experience-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .job-title {
+            font-weight: bold;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        .company {
+            font-style: italic;
+        }
+
+        .date {
+            color: #777;
+        }
+
+        .skills-chart {
+            margin-top: 40px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-top: 20px;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--light-text);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+            background-color: var(--accent-color);
+        }
+
+        .social-icon i {
+            color: var(--primary-color);
+            font-size: 20px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                right: 0;
+                top: 70px;
+                background-color: rgba(255, 255, 255, 0.95);
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                transform: translateX(100%);
+                transition: var(--transition);
+                box-shadow: var(--shadow);
+                padding: 20px 0;
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .experience-header {
+                flex-direction: column;
+            }
+
+            .date {
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">John Doe</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about" class="active">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>About Me</h1>
+
+        <section id="about-me">
+            <div class="profile">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Doe" class="profile-img">
+                <h2>John Doe</h2>
+                <p>Full Stack Developer</p>
+            </div>
+            <p>Hello! I'm John, a passionate Full Stack Developer with over 5 years of experience in creating web applications that solve real-world problems. I specialize in JavaScript frameworks like React and Node.js, and I'm always eager to learn new technologies.</p>
+            <p>My journey in tech began when I built my first website at the age of 15. Since then, I've been captivated by the endless possibilities of web development. I believe in writing clean, maintainable code and creating intuitive user experiences.</p>
+            <p>When I'm not coding, you can find me hiking in the mountains, reading science fiction novels, or experimenting with new cooking recipes. I'm a firm believer in work-life balance and continuous learning.</p>
+            <button class="btn" id="read-more">Read More</button>
+        </section>
+
+        <section id="skills">
+            <h2>Skills & Expertise</h2>
+            <p>I've developed a diverse set of skills throughout my career, focusing on both front-end and back-end technologies. Here's a breakdown of my technical expertise:</p>
+            
+            <div class="skills">
+                <div class="skill-card">
+                    <div class="skill-name">JavaScript</div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 95%;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">React.js</div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 90%;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">Node.js</div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 85%;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">HTML/CSS</div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 95%;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">Python</div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 75%;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">SQL</div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 80%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-chart">
+                <h3>Skills Distribution</h3>
+                <div class="chart-container">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2>Experience & Background</h2>
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="job-title">Senior Full Stack Developer</div>
+                    <div class="date">Jan 2020 - Present</div>
+                </div>
+                <div class="company">TechInnovate Solutions</div>
+                <p>Leading a team of 5 developers to build scalable web applications for enterprise clients. Implemented CI/CD pipelines that reduced deployment time by 40%. Architected microservices that improved system performance by 30%.</p>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="job-title">Full Stack Developer</div>
+                    <div class="date">Mar 2018 - Dec 2019</div>
+                </div>
+                <div class="company">WebFusion Inc.</div>
+                <p>Developed and maintained multiple client websites using React.js and Node.js. Created RESTful APIs that handled over 1 million requests daily. Collaborated with UX designers to implement responsive designs that increased mobile user engagement by 25%.</p>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="job-title">Front-End Developer</div>
+                    <div class="date">Jun 2016 - Feb 2018</div>
+                </div>
+                <div class="company">DigitalCraft Studios</div>
+                <p>Built interactive user interfaces using JavaScript, HTML, and CSS. Optimized website performance resulting in a 40% decrease in load time. Implemented A/B testing that led to a 15% increase in conversion rates.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 John Doe. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" class="social-icon"><i>in</i></a>
+                <a href="#" class="social-icon"><i>gh</i></a>
+                <a href="#" class="social-icon"><i>tw</i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Read More Button
+        const readMoreBtn = document.getElementById('read-more');
+        const aboutMeSection = document.getElementById('about-me');
+        
+        readMoreBtn.addEventListener('click', () => {
+            const additionalContent = document.createElement('div');
+            additionalContent.innerHTML = `
+                <p>I hold a Bachelor's degree in Computer Science from Tech University, where I graduated with honors. Throughout my academic journey, I focused on web development and data structures, which laid a strong foundation for my career.</p>
+                <p>I'm passionate about mentoring junior developers and have conducted several workshops on modern JavaScript frameworks. I believe that sharing knowledge is essential for the growth of our tech community.</p>
+            `;
+            
+            // Insert before the button
+            aboutMeSection.insertBefore(additionalContent, readMoreBtn);
+            
+            // Hide the button after it's clicked
+            readMoreBtn.style.display = 'none';
+        });
+
+        // Skills Chart
+        const ctx = document.getElementById('skillsChart').getContext('2d');
+        
+        // Simple chart implementation without external libraries
+        function drawChart() {
+            const skills = [
+                { name: 'Front-End', value: 90, color: '#4a6fa5' },
+                { name: 'Back-End', value: 85, color: '#166088' },
+                { name: 'Databases', value: 80, color: '#4fc3f7' },
+                { name: 'DevOps', value: 70, color: '#5c6bc0' },
+                { name: 'UI/UX', value: 75, color: '#7986cb' }
+            ];
+            
+            const chartWidth = ctx.canvas.width;
+            const chartHeight = ctx.canvas.height;
+            const barWidth = chartWidth / (skills.length * 2);
+            const maxValue = Math.max(...skills.map(skill => skill.value));
+            const barSpacing = chartWidth / skills.length;
+            
+            ctx.clearRect(0, 0, chartWidth, chartHeight);
+            
+            // Draw bars
+            skills.forEach((skill, index) => {
+                const barHeight = (skill.value / 100) * (chartHeight - 60);
+                const x = index * barSpacing + barSpacing / 2 - barWidth / 2;
+                const y = chartHeight - barHeight - 30;
+                
+                // Draw bar
+                ctx.fillStyle = skill.color;
+                ctx.fillRect(x, y, barWidth, barHeight);
+                
+                // Draw skill name
+                ctx.fillStyle = '#333';
+                ctx.font = '12px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(skill.name, x + barWidth / 2, chartHeight - 10);
+                
+                // Draw value
+                ctx.fillText(skill.value + '%', x + barWidth / 2, y - 5);
+            });
+            
+            // Draw y-axis labels
+            ctx.fillStyle = '#777';
+            ctx.textAlign = 'right';
+            for (let i = 0; i <= 100; i += 20) {
+                const y = chartHeight - (i / 100) * (chartHeight - 60) - 30;
+                ctx.fillText(i + '%', 30, y);
+            }
+        }
+        
+        // Resize chart on window resize
+        window.addEventListener('resize', () => {
+            if (ctx.canvas) {
+                ctx.canvas.width = ctx.canvas.parentNode.offsetWidth;
+                drawChart();
+            }
+        });
+        
+        // Initial draw
+        window.addEventListener('load', () => {
+            if (ctx.canvas) {
+                ctx.canvas.width = ctx.canvas.parentNode.offsetWidth;
+                drawChart();
+            }
+        });
+    </script>
+</body>
+</html>
